@@ -219,7 +219,7 @@ Widget SocialCard(icon) {
   );
 }
 
-class SignForm extends StatelessWidget {
+class SignForm extends StatefulWidget {
   const SignForm({
     super.key,
     required GlobalKey<FormState> formKey,
@@ -236,16 +236,23 @@ class SignForm extends StatelessWidget {
   final VoidCallback login;
 
   @override
+  State<SignForm> createState() => _SignFormState();
+}
+
+class _SignFormState extends State<SignForm> {
+  @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
+      key: widget._formKey,
       child: Column(
         children: [
           TextFormField(
-            controller: _emailController,
+            controller: widget._emailController,
             validator: (value) {
               if (value!.isEmpty) {
                 return "Please Enter the email";
+              } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                return "Please Enter a valid email";
               }
               return null;
             },
@@ -275,9 +282,10 @@ class SignForm extends StatelessWidget {
               ),
             ),
           ),
+
           const SizedBox(height: 20),
           TextFormField(
-            controller: _passwordController,
+            controller: widget._passwordController,
             validator: (value) {
               if (value!.isEmpty) {
                 return "Please Enter the password";
@@ -293,9 +301,20 @@ class SignForm extends StatelessWidget {
                 vertical: 20,
               ),
               floatingLabelBehavior: FloatingLabelBehavior.always,
-              suffixIcon: const Padding(
-                padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
-                child: Icon(Icons.lock_outline),
+              suffixIcon: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _obsureText = !_obsureText;
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 20, 20, 20),
+                  child: Icon(
+                    _obsureText
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                  ),
+                ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40),
@@ -311,7 +330,7 @@ class SignForm extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           GestureDetector(
-            onTap: login,
+            onTap: widget.login,
             child: Container(
               height: 56,
               width: double.infinity,
