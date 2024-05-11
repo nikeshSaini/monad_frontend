@@ -30,7 +30,7 @@ Future<List<AttendanceData>> fetchAttendanceDataList() async {
     print(prefs.getString('token'));
 
     final response = await http.post(
-      Uri.parse('http://172.21.192.1:3000/api/users/view/attendance'),
+      Uri.parse('http://93.127.167.90:3000/api/users/view/attendance'),
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },

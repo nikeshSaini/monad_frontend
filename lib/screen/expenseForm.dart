@@ -499,7 +499,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
 
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://172.21.192.1:3000/api/users/expenseform'),
+        Uri.parse('http://93.127.167.90:3000/api/users/expenseform'),
       );
       // Add form fields
       request.fields['expense[description]'] = _descriptionController.text;

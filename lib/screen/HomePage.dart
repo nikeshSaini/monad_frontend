@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
       print(decodedUserid);
       final response = await http.post(
         Uri.parse(
-          'http://172.21.192.1:3000/api/admin/view/expenseForm/$decodedUserid',
+          'http://93.127.167.90/api/admin/view/expenseForm/$decodedUserid',
         ),
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',

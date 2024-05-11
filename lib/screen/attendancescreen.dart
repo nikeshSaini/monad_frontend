@@ -84,7 +84,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
       print("done api");
       // Make API call only after the user's location is fetched
       final response = await http.post(
-        Uri.parse('http://172.21.192.1:3000/api/users/start'),
+        Uri.parse('http://93.127.167.90:3000/api/users/start'),
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -132,7 +132,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
         print('Work Duration: ${formatDuration(_secondsElapsed)}');
       });
       final response = await http.post(
-        Uri.parse('http://172.21.192.1:3000/api/users/end'),
+        Uri.parse('http://93.127.167.90:3000/api/users/end'),
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
