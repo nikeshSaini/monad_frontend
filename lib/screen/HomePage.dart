@@ -21,6 +21,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late List<Expense> expenses = [];
+  late String username = '';
 
   @override
   void initState() {
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
     WidgetsFlutterBinding.ensureInitialized();
 
     if (widget.token != null) {
+
       if (kDebugMode) {
         print('tokensec');
       }
@@ -35,12 +37,12 @@ class _HomePageState extends State<HomePage> {
         print(widget.token);
       }
       Map<String, dynamic> payload = Jwt.parseJwt(widget.token);
-      if (kDebugMode) {
-        print(payload['user']['fullName']);
-      }
+      setState(() {
+        username = payload['data']['fullName'];
+      });
       _expensapi();
     } else {
-      // Handle the case where widget.token is null
+      username = "username";
     }
   }
 
@@ -110,6 +112,7 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           children: [
+            Text(username),
             const SizedBox(height: 80),
             CustomButton("Attendance", const AttendanceScreen()),
             const SizedBox(height: 20),
