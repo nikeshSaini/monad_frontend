@@ -94,11 +94,13 @@ class _signBodyState extends State<signBody> {
             content: Text('An error occurred. Please try again later.'),
           ),
         );
+      }finally{
+
+        setState(() {
+          changeButton = false;
+        });
       }
 
-      setState(() {
-        changeButton = false;
-      });
     }
   }
 
@@ -274,6 +276,7 @@ class _SignFormState extends State<SignForm> {
   Widget build(BuildContext context) {
     return Form(
       key: widget._formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [
           TextFormField(
@@ -300,7 +303,12 @@ class _SignFormState extends State<SignForm> {
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40),
-                borderSide: const BorderSide(color: ktextColor),
+                borderSide: const BorderSide(color: Colors.red),
+                gapPadding: 10,
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40),
+                borderSide: const BorderSide(color: Colors.red),
                 gapPadding: 10,
               ),
               focusedBorder: OutlineInputBorder(
@@ -355,30 +363,46 @@ class _SignFormState extends State<SignForm> {
                 borderRadius: BorderRadius.circular(40),
                 borderSide: const BorderSide(color: kPrimaryColor),
                 gapPadding: 10,
-              ), //used to when its not in used or tapped
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40),
+                borderSide: const BorderSide(color: Colors.red),
+                gapPadding: 10,
+              ),//used to when its not in used or tapped
             ),
           ),
           const SizedBox(height: 20),
           GestureDetector(
             onTap: widget.login,
-            child: Container(
-              height: 56,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: kPrimaryColor,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Center(
-                child: Text(
-                  "Continue",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: CupertinoColors.white,
+            child: Material(
+              color: Colors.transparent, // Make the material widget transparent
+              borderRadius: BorderRadius.circular(20),
+              child: Ink(
+                decoration: BoxDecoration(
+                  color: kPrimaryColor,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(20),
+                  onTap: widget.login,
+                  child: Container(
+                    height: 56,
+                    width: double.infinity,
+                    child: Center(
+                      child: Text(
+                        "Continue",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: CupertinoColors.white,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
           ),
+
         ],
       ),
     );
@@ -413,7 +437,7 @@ class _SignFormState extends State<SignForm> {
 
 void main() {
   runApp(MaterialApp(
-    title: 'Sign In Example',
+    // title: 'Sign In Example',
     home: Scaffold(
       appBar: AppBar(
         title: const Text('Sign In'),

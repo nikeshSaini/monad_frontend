@@ -7,6 +7,8 @@ import 'dart:convert';
 import '../../style/appStyle.dart';
 import '../signInScreen.dart';
 
+bool _obscureText = false;
+
 class SignUpBody extends StatelessWidget {
   const SignUpBody({Key? key}) : super(key: key);
 
@@ -77,7 +79,6 @@ class _SignUpFormState extends State<SignUpForm> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
   Future<void> _register(BuildContext context) async {
 
     final String name = _nameController.text;
@@ -134,6 +135,7 @@ class _SignUpFormState extends State<SignUpForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [
           TextFormField(
@@ -250,6 +252,11 @@ class _SignUpFormState extends State<SignUpForm> {
                 borderSide: const BorderSide(color: ktextColor),
                 gapPadding: 10,
               ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40),
+                borderSide: BorderSide(color:Colors.red ),
+                gapPadding: 10,
+              ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40),
                 borderSide: const BorderSide(color: kPrimaryColor),
@@ -260,26 +267,34 @@ class _SignUpFormState extends State<SignUpForm> {
           const SizedBox(
             height: 20,
           ),
-          GestureDetector(
-            onTap: () => _register(context),
-            child: Container(
-              height: 56,
-              width: double.infinity,
+          InkWell(
+            onTap: () {
+              if (_formKey.currentState!.validate()) {
+                _register(context);
+              }
+            },
+            borderRadius: BorderRadius.circular(20),
+            child: Ink(
               decoration: BoxDecoration(
                 color: kPrimaryColor,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Center(
-                child: Text(
-                  "Continue",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: CupertinoColors.white,
+              child: Container(
+                height: 56,
+                width: double.infinity,
+                child: Center(
+                  child: Text(
+                    "Continue",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: CupertinoColors.white,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
+
         ],
       ),
     );
