@@ -72,11 +72,14 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
+  bool _isSubmitting = false;
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   Future<void> _register(BuildContext context) async {
+
     final String name = _nameController.text;
     final String email = _emailController.text;
     final String password = _passwordController.text;
@@ -130,6 +133,7 @@ class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           TextFormField(
@@ -157,6 +161,11 @@ class _SignUpFormState extends State<SignUpForm> {
                 borderSide: const BorderSide(color: ktextColor),
                 gapPadding: 10,
               ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40),
+                borderSide: BorderSide(color:Colors.red ),
+                gapPadding: 10,
+              ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40),
                 borderSide: const BorderSide(
@@ -171,12 +180,15 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           TextFormField(
             controller: _emailController,
-            validator: (value) {
-              if (value!.isEmpty) {
+            validator: (value){
+              if(value!.isEmpty){
                 return "Please Enter the email";
+              }else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                return 'Please enter a valid email';
               }
               return null;
             },
+            keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               labelText: "Email",
               hintText: "Enter your email",
@@ -194,11 +206,17 @@ class _SignUpFormState extends State<SignUpForm> {
                 borderSide: const BorderSide(color: ktextColor),
                 gapPadding: 10,
               ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40),
+                borderSide: BorderSide(color:Colors.red ),
+                gapPadding: 10,
+              ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(40),
                 borderSide: const BorderSide(
                   color: kPrimaryColor,
                 ),
+
                 gapPadding: 10,
               ),
             ),

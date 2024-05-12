@@ -164,12 +164,17 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               onTap: () async {
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                await prefs.clear();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SignInScreen()),
-                );
+                try{
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  await prefs.clear();
+                  await prefs.remove('token');
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignInScreen()),
+                  );
+                }catch(e){
+                  print('Error occurred during logout: $e');
+                }
               },
             ),
           ],

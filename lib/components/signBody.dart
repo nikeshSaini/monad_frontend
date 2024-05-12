@@ -11,7 +11,9 @@ import 'dart:convert';
 import 'package:monad/style/appStyle.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-bool _obsureText = false;
+import '../admin/adminLogin.dart';
+
+bool _obsureText = true;
 
 class signBody extends StatefulWidget {
   const signBody({Key? key}) : super(key: key);
@@ -149,11 +151,11 @@ class _signBodyState extends State<signBody> {
                 const Spacer(),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const forgotPassword()),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => const forgotPassword()),
+                    // );
                   },
                   child: const Text(
                     "Forgot password",
@@ -191,10 +193,38 @@ class _signBodyState extends State<signBody> {
                       fontSize: 16,
                     ),
                   ),
-                )
+                ),
               ],
             ),
             const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 40,),
+                Text(
+                  "Are you Admin? ",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => AdminSignInScreen()));
+                  },
+                  child: Text(
+                    "Admin",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: kPrimaryColor,
+                      fontSize: 18
+                    ),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(height: 10),
           ],
         ),
       ),
