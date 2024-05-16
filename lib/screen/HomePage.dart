@@ -36,13 +36,13 @@ class _HomePageState extends State<HomePage> {
       if (kDebugMode) {
         print(widget.token);
       }
-      Map<String, dynamic> payload = Jwt.parseJwt(widget.token);
-      setState(() {
-        username = payload['data']['fullName'];
-      });
+      // Map<String, dynamic> payload = Jwt.parseJwt(widget.token);
+      // setState(() {
+      //   username = payload['data']['fullName'];
+      // });
       _expensapi();
     } else {
-      username = "username";
+      // username = "username";
     }
   }
 

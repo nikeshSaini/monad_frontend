@@ -44,10 +44,10 @@ Future<List<AttendanceData>> fetchAttendanceDataList() async {
       print('Response: $jsonResponse');
       if (jsonResponse.containsKey('attendanceRecords')) {
         List<dynamic> attendanceRecords = jsonResponse['attendanceRecords'];
-        print('Attendance Records: $attendanceRecords');
+        // print('Attendance Records: $attendanceRecords');
         List<AttendanceData> attendanceDataList =
             attendanceRecords.map((record) {
-          print(record['startTime']);
+          // print(record['startTime']);
           DateTime startDate = DateTime.parse(record['startTime']);
           DateTime istTime = startDate.toLocal();
           String formattedIST =
@@ -71,8 +71,9 @@ Future<List<AttendanceData>> fetchAttendanceDataList() async {
           return AttendanceData(
             startDate: formattedISTDateTime,
             endDate: endDate,
-          ); 
+          );
         }).toList();
+        attendanceDataList.sort((a, b) => b.startDate.compareTo(a.startDate));
 
         // Now you have a list of AttendanceData objects
         print("Attendance Records:");
@@ -80,7 +81,7 @@ Future<List<AttendanceData>> fetchAttendanceDataList() async {
           print(
               "Start Date: ${attendanceData.startDate}, End Date: ${attendanceData.endDate}");
         });
-
+        // attendanceDataList.sort();
         return attendanceDataList;
       } else {
         print("No attendance records found in the response.");
