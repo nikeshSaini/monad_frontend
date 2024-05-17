@@ -67,6 +67,11 @@ class _signBodyState extends State<signBody> {
               'password': password,
             });
         if (response.statusCode == 200) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Successful Login'),
+            ),
+          );
           var jsonResponse = jsonDecode(response.body);
           final String token = jsonResponse['token'];
           prefs.setString('token', token);
@@ -80,14 +85,19 @@ class _signBodyState extends State<signBody> {
                   builder: (context) => HomePage(
                         token: token,
                       )));
-          print("done");
-          print(response.body);
+          // print("done");
+          // print(response.body);
         } else {
-          print('failed');
-          print(response.statusCode);
+          // print('failed');
+          // print(response.statusCode);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Failed to login'),
+            ),
+          );
         }
       } catch (e) {
-        print(e);
+        // print(e);
         // Handle exceptions, e.g., network errors
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(

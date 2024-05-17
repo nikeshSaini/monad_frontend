@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     WidgetsFlutterBinding.ensureInitialized();
 
-    if (widget.token != null) {
+    if (widget.token != null ) {
 
       if (kDebugMode) {
         print('tokensec');
@@ -45,10 +45,17 @@ class _HomePageState extends State<HomePage> {
       // username = "username";
     }
   }
-
+  // Future<void> _username() async{
+  //   try{
+  //     final decodedUserid = Jwt.parseJwt(widget.token)['user']['_id'];
+  //   }catch(e){
+  //     print(e);
+  //   }
+  // }
   Future<void> _expensapi() async {
     try {
       final decodedUserid = Jwt.parseJwt(widget.token)['user']['_id'];
+      username = Jwt.parseJwt(widget.token)['user']['fullName'];
       print(decodedUserid);
       final response = await http.post(
         Uri.parse(
@@ -60,7 +67,7 @@ class _HomePageState extends State<HomePage> {
       );
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);
-        print(response.body);
+        // print(response.body);
 
         // Extract expenses data from the response and set it
         List<dynamic> expenseRecords = jsonResponse['feedbacks'];
