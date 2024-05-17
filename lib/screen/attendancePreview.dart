@@ -146,7 +146,10 @@ class _AttendancePreviewState extends State<AttendancePreview> {
                 scrollDirection: Axis.vertical,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: DataTable(
+                  child:attendanceDataList.isEmpty?Center(
+                    child: Text("No Data available"),
+                  ):
+                   DataTable(
                     columns: const <DataColumn>[
                       DataColumn(label: Text('S.No.')),
                       DataColumn(label: Text('Date')),

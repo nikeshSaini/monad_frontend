@@ -36,7 +36,7 @@ class _SignInScreenState extends State<SignInScreen> {
             },
           ),
         ),
-        body: const signBody(),
+        body: SafeArea(child: const signBody()),
       ),
     );
   }

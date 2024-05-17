@@ -528,8 +528,9 @@ class _ExpenseFormState extends State<ExpenseForm> {
             content: Text('Submitted'),
           ),
         );
-        print("Upload successful");
-        print(response.body);
+        // print("Upload successful");
+        // print(response.body);
+        Navigator.of(context).pop();
       } else {
         _isSubmitting = false;
         ScaffoldMessenger.of(context).showSnackBar(
@@ -539,7 +540,7 @@ class _ExpenseFormState extends State<ExpenseForm> {
           ),
         );
         print("Upload failed with status code: ${response.statusCode}");
-        print(response.body);
+        // print(response.body);
       }
     } catch (e) {
       _isSubmitting = false;

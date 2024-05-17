@@ -59,6 +59,32 @@ class SignUpBody extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Already have account? ",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => SignInScreen()));
+                  },
+                  child: Text(
+                    "Login",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: kPrimaryColor,
+                      fontSize: 18
+                    ),
+                  ),
+                )
+              ],
+            ),
           ],
         ),
       ),

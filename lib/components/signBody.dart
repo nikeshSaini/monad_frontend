@@ -149,35 +149,35 @@ class _signBodyState extends State<signBody> {
               login: () => _login(context),
             ),
             const SizedBox(height: 20),
-            Row(
-              children: [
-                Checkbox(
-                  value: remember,
-                  onChanged: (value) {
-                    setState(() {
-                      remember = value!;
-                    });
-                  },
-                ),
-                const Text("Remember Me"),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => const forgotPassword()),
-                    // );
-                  },
-                  child: const Text(
-                    "Forgot password",
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   children: [
+            //     Checkbox(
+            //       value: remember,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           remember = value!;
+            //         });
+            //       },
+            //     ),
+            //     // const Text("Remember Me"),
+            //     // const Spacer(),
+            //     // GestureDetector(
+            //     //   onTap: () {
+            //     //     // Navigator.push(
+            //     //     //   context,
+            //     //     //   MaterialPageRoute(
+            //     //     //       builder: (context) => const forgotPassword()),
+            //     //     // );
+            //     //   },
+            //     //   child: const Text(
+            //     //     "Forgot password",
+            //     //     style: TextStyle(
+            //     //       decoration: TextDecoration.underline,
+            //     //     ),
+            //     //   ),
+            //     // ),
+            //   ],
+            // ),
             SizedBox(height: screenHeight * 0.04),
             SizedBox(height: screenHeight * 0.03),
             Row(
@@ -209,34 +209,34 @@ class _signBodyState extends State<signBody> {
               ],
             ),
             const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 40,),
-                Text(
-                  "Are you Admin? ",
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => AdminSignInScreen()));
-                  },
-                  child: Text(
-                    "Admin",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: kPrimaryColor,
-                      fontSize: 18
-                    ),
-                  ),
-                )
-              ],
-            ),
-            SizedBox(height: 10),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   children: [
+            //     SizedBox(height: 40,),
+            //     Text(
+            //       "Are you Admin? ",
+            //       style: TextStyle(
+            //         fontSize: 16,
+            //       ),
+            //     ),
+            //     InkWell(
+            //       onTap: () {
+            //         Navigator.push(
+            //             context, MaterialPageRoute(builder: (context) => AdminSignInScreen()));
+            //       },
+            //       child: Text(
+            //         "Admin",
+            //         style: TextStyle(
+            //           fontWeight: FontWeight.bold,
+            //           color: kPrimaryColor,
+            //           fontSize: 18
+            //         ),
+            //       ),
+            //     )
+            //   ],
+            // ),
+            // SizedBox(height: 10),
           ],
         ),
       ),

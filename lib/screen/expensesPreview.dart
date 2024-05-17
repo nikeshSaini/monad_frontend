@@ -37,7 +37,9 @@ class ExpensePreview extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: DataTable(
+        child:expenses.isEmpty?Text("No data available"):
+
+        DataTable(
           columns: <DataColumn>[
             DataColumn(label: Text('S.No.')),
             DataColumn(label: Text('Date')),

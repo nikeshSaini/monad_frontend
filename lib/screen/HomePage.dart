@@ -28,30 +28,22 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     WidgetsFlutterBinding.ensureInitialized();
 
-    if (widget.token != null ) {
-
+    if (widget.token != null && widget.token.isNotEmpty) {
       if (kDebugMode) {
-        print('tokensec');
+        // print('tokensec');
+        // print(widget.token);
       }
-      if (kDebugMode) {
-        print(widget.token);
-      }
-      // Map<String, dynamic> payload = Jwt.parseJwt(widget.token);
-      // setState(() {
-      //   username = payload['data']['fullName'];
-      // });
       _expensapi();
     } else {
-      // username = "username";
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const SignInScreen()),
+        );
+      });
     }
   }
-  // Future<void> _username() async{
-  //   try{
-  //     final decodedUserid = Jwt.parseJwt(widget.token)['user']['_id'];
-  //   }catch(e){
-  //     print(e);
-  //   }
-  // }
+
   Future<void> _expensapi() async {
     try {
       final decodedUserid = Jwt.parseJwt(widget.token)['user']['_id'];
@@ -121,7 +113,8 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           children: [
-            Text(username),
+            Text('Welcome $username'),
+
             const SizedBox(height: 80),
             CustomButton("Attendance", const AttendanceScreen()),
             const SizedBox(height: 20),
